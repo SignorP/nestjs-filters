@@ -1,0 +1,64 @@
+{
+    "name": "nestjs-filters",
+    "version": "0.0.1",
+    "description": "Production-ready, modular Exception Filters for NestJS to handle HTTP, TypeORM, and unhandled system errors gracefully.",
+    "keywords": [
+        "nestjs",
+        "nex",
+        "recipe",
+        "exception-filters",
+        "error-handling",
+        "typeorm",
+        "http",
+        "logging"
+    ],
+    "files": [
+        "src/common",
+        "recipes/nestjs-filters"
+    ],
+    "setup": {
+        "variants": [
+            {
+                "name": "http-only",
+                "description": "Catches standard NestJS HTTP exceptions and formats them with standardized JSON responses and lightweight logging.",
+                "setup": {
+                    "files": {
+                        "src/common/filters": {
+                            "http-exception.filter.ts": "src/common/filters"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "global-catchall",
+                "description": "Catches all unhandled system exceptions (500 Internal Server Error) to prevent app crashes and sensitive data leaks.",
+                "setup": {
+                    "files": {
+                        "src/common/filters": {
+                            "all-exceptions.filter.ts": "src/common/filters"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "typeorm",
+                "description": "Catches TypeORM-specific errors (e.g., unique constraint violations) and maps them to standard HTTP conflict responses.",
+                "setup": {
+                    "files": {
+                        "src/common/filters": {
+                            "typeorm-exception.filter.ts": "src/common/filters"
+                        }
+                    },
+                    "scripts": [
+                        "bun install typeorm"
+                    ]
+                }
+            }
+        ],
+        "files": {
+            "recipes/nestjs-filters": {
+                "README.md": "recipes/nestjs-filters"
+            }
+        }
+    }
+}
